@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Смотри сюда</title>
+<style>
+  :root {
+    box-sizing: border-box;
+    --bg: #f3f0e8;
+    --ink: #1d2a3a;
+    --arrow: #e0452b;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) { --bg: #161c26; --ink: #eef1f6; --arrow: #ff7a5c; color-scheme: dark; }
+  }
+  :root[data-theme="dark"] { --bg: #161c26; --ink: #eef1f6; --arrow: #ff7a5c; color-scheme: dark; }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { height: 100%; margin: 0; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "Trebuchet MS", "Segoe UI", system-ui, sans-serif;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+  }
+
+  .stage {
+    position: relative;
+    width: min(92vw, 760px);
+    aspect-ratio: 1 / 1;
+    max-height: 92vh;
+    display: grid;
+    place-items: center;
+  }
+
+  .text {
+    margin: 0;
+    text-align: center;
+    font-size: clamp(1.6rem, 6vw, 3.4rem);
+    font-weight: 800;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    max-width: 60%;
+  }
+
+  .arrow {
+    position: absolute;
+    width: clamp(48px, 11vw, 96px);
+    height: auto;
+    color: var(--arrow);
+    animation: nudge 1.4s ease-in-out infinite;
+  }
+  /* стрелка по умолчанию смотрит вправо; поворачиваем к центру */
+  .a-top    { top: 4%;    left: 50%; --r: 90deg;  --dx: 0px;  --dy: 8px; }
+  .a-bottom { bottom: 4%; left: 50%; --r: -90deg; --dx: 0px;  --dy: -8px; }
+  .a-left   { left: 0;    top: 50%;  --r: 0deg;   --dx: 8px;  --dy: 0px; }
+  .a-right  { right: 0;   top: 50%;  --r: 180deg; --dx: -8px; --dy: 0px; }
+  .a-top, .a-bottom { transform: translate(-50%, 0) rotate(var(--r)); }
+  .a-left, .a-right { transform: translate(0, -50%) rotate(var(--r)); }
+
+  .a-diag1 { top: 12%;    left: 8%;   --r: 45deg; }
+  .a-diag2 { top: 12%;    right: 8%;  --r: 135deg; }
+  .a-diag3 { bottom: 12%; left: 8%;   --r: -45deg; }
+  .a-diag4 { bottom: 12%; right: 8%;  --r: -135deg; }
+
+  @keyframes nudge {
+    0%, 100% { translate: 0 0; }
+    50%      { translate: var(--dx, 0px) var(--dy, 0px); }
+  }
+  @media (prefers-reduced-motion: reduce) { .arrow { animation: none; } }
+</style>
+</head>
+<body>
+  <main class="stage">
+    <h1 class="text">Вот самое важное, что нужно увидеть</h1>
+
+    <svg class="arrow a-top" viewBox="0 0 100 50" aria-hidden="true"><path d="M4 25h78M58 5l32 20-32 20" fill="none" stroke="currentColor" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <svg class="arrow a-bottom" viewBox="0 0 100 50" aria-hidden="true"><path d="M4 25h78M58 5l32 20-32 20" fill="none" stroke="currentColor" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <svg class="arrow a-left" viewBox="0 0 100 50" aria-hidden="true"><path d="M4 25h78M58 5l32 20-32 20" fill="none" stroke="currentColor" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <svg class="arrow a-right" viewBox="0 0 100 50" aria-hidden="true"><path d="M4 25h78M58 5l32 20-32 20" fill="none" stroke="currentColor" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </main>
+</body>
+</html>
